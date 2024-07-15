@@ -1,5 +1,7 @@
 package com.example.findingFlatmates.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +22,7 @@ public class flatPosts {
 	private int id;
 	private String ptitle;
 	private String desc;
-	private long price;
+	private Long price;
 	private String ppics;
 	private String city;
 	private String fulladdress;

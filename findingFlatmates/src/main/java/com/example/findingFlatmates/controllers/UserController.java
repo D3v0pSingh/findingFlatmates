@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.findingFlatmates.Dtos.UserDto;
 import com.example.findingFlatmates.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -27,12 +29,12 @@ public class UserController {
 	}
 
 	@PostMapping("/postUser")
-	public UserDto creatingUser(@RequestBody UserDto udto) {
+	public UserDto creatingUser(@Valid @RequestBody UserDto udto) {
 		return service.createUser(udto);
 	}
 	
 	@PutMapping("/updateUser/{id}")
-	public UserDto updatingUser(@RequestBody UserDto udto, @PathVariable int id) {
+	public UserDto updatingUser(@Valid @RequestBody UserDto udto, @PathVariable int id) {
 		return service.updateUser(udto, id);
 	}
 	
