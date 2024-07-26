@@ -7,6 +7,9 @@ import java.util.stream.Stream;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.findingFlatmates.Dtos.UserDto;
@@ -16,7 +19,7 @@ import com.example.findingFlatmates.repositories.UserRepo;
 import com.example.findingFlatmates.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService,UserDetailsService {
 	@Autowired
 	private UserRepo repo;
 	@Autowired
@@ -59,6 +62,12 @@ public class UserServiceImpl implements UserService {
 	public UserDto getUser(int id) {
 		User gettingUser = repo.findById(id).orElseThrow(()->new ResourceNotFoundException("User", "id", id));
 		return mm.map(gettingUser, UserDto.class);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user =  repo.findByEmail(username).orElseThrow(()->new ResourceNotFoundException("User", username, 0));
+		return mm.map(user, UserDto.class);
 	}
 
 }

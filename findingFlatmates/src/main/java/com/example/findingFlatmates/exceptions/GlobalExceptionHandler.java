@@ -36,8 +36,6 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	public ResponseEntity<ApiResponse> missingServletRequestParameterException(MissingServletRequestParameterException ex){
-		
-		
 		String message = "";
 		if(ex.getParameterName().equals("tenenttype")) {
 			 message = "Please fill Male/Female details";
